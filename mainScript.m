@@ -2,26 +2,56 @@
 N = 5000;
 distribution = 'o';
 
-figure
-subplot(1,2,1)
-plotKellipse(0.7, 2, 2)
+% figure
+% subplot(1,2,1)
+% plotKellipse(0.7, 2, 2)
+% 
+% subplot(1,2,2)
+% plotKellipse(0.6, 2.3, 3)
 
-subplot(1,2,2)
-plotKellipse(0.6, 2.3, 3)
-
 figure
-D = [10, 10; 12, 8; 15, 5; 20, 0];
+%D = [10, 10; 12, 8; 15, 5; 20, 0];
+D = [10, 10; 15, 5; 20, 0; 20, 0];
 for k = 1:4
     L = k + 1;
     W_P = NetworkRandomWithCycles(N, D(k,:), [L, 0], [1, 1], distribution);
-    W_N = NetworkRandomWithCycles(N, D(k,:), [L, 0], [-1, 1], distribution);
-    subplot(2,4,k)
-    plotEigenWithKellipse(W_P, L);
+    %W_N = NetworkRandomWithCycles(N, D(k,:), [L, 0], [-1, 1], distribution);
+    subplot(2,2,k)
+    plot_eigenvalues(W_P)
+    %plotEigenWithKellipse(W_P, L);
 
-    subplot(2,4,k + 4)
-    plotEigenWithKellipse(W_N, L);
+%     subplot(2,4,k + 4)
+%     plot_eigenvalues(W_N)
+    %plotEigenWithKellipse(W_N, L);
     
 end
+
+L=3;
+figure
+W = NetworkRandomWithCycles(N, [20, 0], [L, 0], [1, 1], distribution);
+subplot(2,2,1)
+plot_eigenvalues(W)
+r = rho(W,L);
+title(['\rho_3 = ',num2str(r,3)]);
+
+W = NetworkRandomWithCycles(N, [10, 10], [L, 0], [1, 1], distribution);
+subplot(2,2,2)
+plot_eigenvalues(W)
+r = rho(W,L);
+title(['\rho_3 = ',num2str(r,3)]);
+
+W = NetworkRandomWithCycles(N, [20, 0], [L, 0], [-1, 1], distribution);
+subplot(2,2,3)
+plot_eigenvalues(W)
+r = rho(W,L);
+title(['\rho_3 = ',num2str(r,3)]);
+
+W = NetworkRandomWithCycles(N, [10, 10], [L, 0], [-1, 1], distribution);
+subplot(2,2,4)
+plot_eigenvalues(W)
+r = rho(W,L);
+title(['\rho_3 = ',num2str(r,3)]);
+
 
 figure
 for k = 1:8
